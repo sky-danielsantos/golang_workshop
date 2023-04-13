@@ -52,12 +52,12 @@ func trimQuote(s string) string {
 }
 
 // TODO: implement me
-func parseCsvContent(csvContent string, delim string) (*Csv, error) {
-	return &Csv{}, nil
+func parseCsvContent(csvContent string, delim string) Csv {
+	return Csv{}
 }
 
 // TODO: implement me
-func convertCsv2Json(csv *Csv) []JsonObject {
+func convertCsv2Json(csv Csv) []JsonObject {
 	var listOfJsonObjects []JsonObject
 	obj := JsonObject{"k1": "v"}
 	obj.AddKeyValue("k2", "v")
@@ -77,6 +77,9 @@ func ReadAndConvert2Json(filepath string, delim string) (string, error) {
 	return ConvertCsv2Json(string(csvContent), delim), nil
 }
 
+// TODO: implement me (needs to be converted/marshalled to JSON)
 func ConvertCsv2Json(csvContent string, delim string) string {
+	csv := parseCsvContent(csvContent, delim)
+	convertCsv2Json(csv)
 	return ""
 }

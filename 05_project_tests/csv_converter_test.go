@@ -33,13 +33,9 @@ func TestUnitParseCsv(t *testing.T) {
 	}`)
 
 	// act
-	csv, err := parseCsvContent(string(csvContent), ',')
+	csv := parseCsvContent(string(csvContent), ",")
 
 	// assert
-	if err != nil {
-		t.Errorf("expected err to be nil but got %s", err)
-		return
-	}
 	if csv.headers != nil {
 		t.Errorf("expected csv headers to exist but got nil")
 		return
@@ -97,7 +93,7 @@ func TestUnitConvertCSV2Json(t *testing.T) {
 	}
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
-			got := convertCsv2Json(&tc.input)
+			got := convertCsv2Json(tc.input)
 			if !reflect.DeepEqual(tc.want, got) {
 				t.Fatalf("expected: %v, got: %v", tc.want, got)
 			}
