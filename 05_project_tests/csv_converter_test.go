@@ -24,21 +24,18 @@ func assertCell(t *testing.T, rows [][]string, rowIndex int, colIndex int, expec
 
 func TestUnitParseCsv(t *testing.T) {
 	// arrange
-	var csvContent = []byte(`
-	{
-	name,age,avenue
-	"Person 1",10,"Some Avenue 1"
-	"Person 2",20,"Some Avenue 2"
-	"Person 3",30,"Some Avenue 3"
-	"Person 4",40,""
-	"Person 5",,"Some Avenue 5"
-	}`)
+	var csvContent = []byte(`name,age,avenue
+"Person 1",10,"Some Avenue 1"
+"Person 2",20,"Some Avenue 2"
+"Person 3",30,"Some Avenue 3"
+"Person 4",40,""
+"Person 5",,"Some Avenue 5"`)
 
 	// act
 	csv := parseCsvContent(string(csvContent), ",")
 
 	// assert
-	if csv.headers != nil {
+	if csv.headers == nil {
 		t.Errorf("expected csv headers to exist but got nil")
 		return
 	}
@@ -47,7 +44,7 @@ func TestUnitParseCsv(t *testing.T) {
 		t.Errorf("expected csv headers to be 3 but got %d", len(csv.headers))
 	}
 
-	if csv.GetRowsSize() != 3 {
+	if csv.GetRowsSize() != 5 {
 		t.Errorf("expected rows size to be 3 but got %d", csv.GetRowsSize())
 	}
 

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"os"
 	"strings"
 )
@@ -52,7 +53,7 @@ func trimQuote(s string) string {
 	return s
 }
 
-// TODO: implement me
+// TODO: implement me ( assume that csv has always at least one row and one header )
 func parseCsvContent(csvContent string, delim string) Csv {
 	return Csv{}
 }
@@ -71,12 +72,16 @@ func ReadAndConvert2Json(filepath string, delim string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return ConvertCsv2Json(string(csvContent), delim), nil
+	return ConvertCsv2Json(string(csvContent), delim)
 }
 
 // TODO: implement me (needs to be converted/marshalled to JSON)
-func ConvertCsv2Json(csvContent string, delim string) string {
+func ConvertCsv2Json(csvContent string, delim string) (string, error) {
 	csv := parseCsvContent(csvContent, delim)
-	convertCsv2Json(csv)
-	return ""
+	jsonObjectList := convertCsv2Json(csv)
+	json, err := json.MarshalIndent(jsonObjectList, "", "  ")
+	if err != nil {
+		return "", err
+	}
+	return string(json), nil
 }
