@@ -30,6 +30,8 @@ func TestUnitParseCsv(t *testing.T) {
 	"Person 1",10,"Some Avenue 1"
 	"Person 2",20,"Some Avenue 2"
 	"Person 3",30,"Some Avenue 3"
+	"Person 4",40,""
+	"Person 5",,"Some Avenue 5"
 	}`)
 
 	// act
@@ -62,6 +64,14 @@ func TestUnitParseCsv(t *testing.T) {
 	assertCell(t, rows, 2, 0, "Person 3")
 	assertCell(t, rows, 2, 1, "30")
 	assertCell(t, rows, 2, 2, "Some Avenue 3")
+
+	assertCell(t, rows, 3, 0, "Person 4")
+	assertCell(t, rows, 3, 1, "40")
+	assertCell(t, rows, 3, 2, "")
+
+	assertCell(t, rows, 4, 0, "Person 5")
+	assertCell(t, rows, 4, 1, "")
+	assertCell(t, rows, 4, 2, "Some Avenue 5")
 }
 
 func TestUnitConvertCSV2Json(t *testing.T) {

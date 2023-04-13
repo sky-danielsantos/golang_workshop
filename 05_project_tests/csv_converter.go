@@ -5,6 +5,8 @@ import (
 	"strings"
 )
 
+// New fields can be added
+// New functions can be added
 type Csv struct {
 	headers []string
 	rows    [][]string
