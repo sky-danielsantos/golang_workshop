@@ -1,7 +1,6 @@
 package main
 
 import (
-	"io/ioutil"
 	"os"
 	"strings"
 )
@@ -66,11 +65,7 @@ func convertCsv2Json(csv Csv) []JsonObject {
 }
 
 func ReadAndConvert2Json(filepath string, delim string) (string, error) {
-	file, err := os.Open(filepath)
-	if err != nil {
-		return "", err
-	}
-	csvContent, err := ioutil.ReadAll(file)
+	csvContent, err := os.ReadFile(filepath)
 	if err != nil {
 		return "", err
 	}
